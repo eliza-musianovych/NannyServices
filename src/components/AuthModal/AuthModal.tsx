@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import css from './AuthModal.module.css';
 
 import { createPortal } from 'react-dom';
+import { useId } from 'react';
 
 import { IoMdClose } from "react-icons/io";
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
+import { Field, Form, Formik } from 'formik';
 
 type AuthModalProps = {
     mode: 'login' | 'register';
@@ -12,6 +15,9 @@ type AuthModalProps = {
 
 export default function AuthModal({ mode, onClose }: AuthModalProps) {
     const isRegister = mode === 'register';
+    const fieldId = useId();
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event.target === event.currentTarget) {
@@ -44,17 +50,77 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
         >
             <div className={css.modal}>
                 <button
+                className={css.closeBtn}
                 onClick={onClose}
                 aria-label="Close modal"
                 >
-                    <IoMdClose size={32}/>
+                    <IoMdClose size={32} color='var(--main-text-color)'/>
                 </button>
-                <h2>{isRegister ? 'Registration' : 'Log In'}</h2>
+                <h2 className={css.title}>{isRegister ? 'Registration' : 'Log In'}</h2>
                 <p>{
                 isRegister ?
                 'Thank you for your interest in our platform! In order to register, we need some information. Please provide us with the following information.' :
                 'Welcome back! Please enter your credentials to access your account and continue your babysitter search.'
                 }</p>
+
+                <Formik initialValues={{}} onSubmit={() => {}}>
+                    <Form className={css.form}>
+
+                        <fieldset className={css.fieldset}>
+                            {isRegister &&
+                            <Field
+                            className={css.formElement}
+                            type='text'
+                            name='username'
+                            id={`${fieldId}-username`}
+                            placeholder='Name'
+                            />
+                            }
+                            <Field
+                            className={css.formElement}
+                            type='email'
+                            name='email'
+                            id={`${fieldId}-email`}
+                            placeholder='Email'
+                            />
+
+                            <div className={css.passwordContainer}>
+                                <Field
+                                className={css.formElement}
+                                type={showPassword ? 'text' : 'password'}
+                                name='password'
+                                id={`${fieldId}-password`}
+                                placeholder='Password'
+                                />
+
+                                <button
+                                className={css.showPassword}
+                                type='button'
+                                onClick={() => setShowPassword((prev) => !prev)}
+                                tabIndex={-1}
+                                >
+                                    {showPassword ?  
+                                    <HiOutlineEye 
+                                    color='var(---main-text-color)' 
+                                    size={20}
+                                    /> :
+                                    <HiOutlineEyeOff 
+                                    color='var(---main-text-color)' 
+                                    size={20} 
+                                    />}
+                                </button>
+                            </div>
+                        </fieldset>
+
+                        <button 
+                        className={css.submitBtn}
+                        type='submit'
+                        >
+                            Sign Up
+                        </button>
+
+                    </Form>
+                </Formik>
             </div>
         </div>,
         document.body
