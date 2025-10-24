@@ -1,0 +1,57 @@
+.header {
+    display: flex;
+    background-color: var(--color-scheme);
+    align-items: center;
+    padding: 20px 128px;
+    justify-content: space-around;
+}
+
+.homeHeader {
+    background-color: transparent;
+    border-bottom: 1px solid rgba(251, 251, 251, 0.4);
+    padding-left: 96px;
+    padding-right: 96px;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 24px;
+    line-height: 117%;
+    letter-spacing: -0.02em;
+    color: var(--color-background-aditional);
+    margin-right: 305px;
+}
+
+.homeLogo {
+    margin-right: 487px;
+}
+
+.navigation {
+    display: flex;
+    gap: 40px;
+}
+
+.navigationItem {
+    color: var(--color-background-aditional);
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+}
+
+.authBtnList {
+    margin-left: 92px;
+    display: flex;
+    gap: 8px;
+}
+
+.authBtnItem {
+    padding: 14px 39px;
+    color: var(--color-background-aditional);
+    border: 1px solid rgba(251, 251, 251, 0.4);
+    background-color: transparent;
+    min-width: 124px;
+}
+
+.register {
+    background-color: var(--color-scheme);
+}

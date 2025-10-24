@@ -1,0 +1,139 @@
+:root {
+  --font-family: "Helvetica Neue", sans-serif;
+
+  --color-background-aditional: #fbfbfb;
+  --color-background: #f3f3f3;
+  --color-white: #fff;
+
+  --color-red: #f03f3b;
+  --color-light-red: rgba(240, 63, 59, 0.2);
+  
+  --color-blue: #0957c3;;
+  --color-light-blue: rgba(9, 87, 195, 0.2);
+
+  --color-green: #103931;
+  --color-light-green: rgba(16, 57, 49, 0.2);
+
+  --main-text-color: #11101c;
+  --second-text-color: rgba(17, 16, 28, 0.5);
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-theme='red'] {
+  --color-scheme: var(--color-red);
+  --color-scheme-alt:var(--color-light-red);
+}
+
+[data-theme='blue'] {
+  --color-scheme: var(--color-blue);
+  --color-scheme-alt: var(--color-light-blue);
+}
+
+[data-theme='green'] {
+  --color-scheme: var(--color-green);
+  --color-scheme-alt: var(--color-light-green);
+}
+
+html,
+body,
+#root {
+  height: 100%;         
+  margin: 0;            
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  font-family: var(--font-family);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  line-height: 125%;
+  font-weight: 500;
+  color: var(--main-text-color);
+  background-color: var(--color-background-aditional);
+}
+
+h1 {
+  font-size: 70px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+  color: var(--color-background-aditional);
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 100%;
+}
+
+button {
+  border-radius: 30px;
+  cursor: pointer;
+  background-color: var(--color-scheme);
+  border: none;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  outline: none;
+}
+
+button:hover {
+  background-color: var(--color-background-aditional);
+  color: var(--color-scheme);
+}
+
+section {
+  max-width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+
+  flex: 1;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--second-text-color);
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: none;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}

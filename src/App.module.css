@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    margin: 32px;
+    border-radius: 30px;
+    overflow: hidden;
+    background:
+    linear-gradient(to right, var(--color-scheme) 50%, transparent 50%),
+    url(../public/homeImg.jpg);
+    background-repeat: no-repeat, no-repeat;
+    background-position: left top, right center;
+    background-size: 100% 100%, 50% 100%; 
+}
