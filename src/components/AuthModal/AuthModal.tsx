@@ -6,16 +6,49 @@ import { useId } from 'react';
 
 import { IoMdClose } from "react-icons/io";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
-import { Field, Form, Formik } from 'formik';
+import { 
+    Field, 
+    Form, 
+    Formik, 
+    type FormikHelpers,
+    ErrorMessage
+} from 'formik';
+import { RegistrationSchema } from '../../validation/registrationSchema';
+import { LoginSchema } from '../../validation/loginSchema';
 
 type AuthModalProps = {
     mode: 'login' | 'register';
     onClose: () => void;
-}
+};
+
+type AuthFormValues = {
+    username?: string;
+    email: string;
+    password: string;
+};
 
 export default function AuthModal({ mode, onClose }: AuthModalProps) {
     const isRegister = mode === 'register';
     const fieldId = useId();
+
+    const initialLogin: AuthFormValues = {
+        email: "",
+        password: "",
+    };
+
+    const initialRegister: AuthFormValues = {
+        username: "",
+        email: "",
+        password: "",
+    };
+
+    const handleSubmit = (
+        values: AuthFormValues,
+        action: FormikHelpers<AuthFormValues>
+    ) => {
+        console.log(values);
+        action.resetForm();
+    };
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -63,25 +96,42 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
                 'Welcome back! Please enter your credentials to access your account and continue your babysitter search.'
                 }</p>
 
-                <Formik initialValues={{}} onSubmit={() => {}}>
+                <Formik 
+                initialValues={isRegister ? initialRegister : initialLogin} 
+                validationSchema={isRegister ? RegistrationSchema : LoginSchema}
+                onSubmit={handleSubmit}
+                >
                     <Form className={css.form}>
 
                         <fieldset className={css.fieldset}>
                             {isRegister &&
-                            <Field
-                            className={css.formElement}
-                            type='text'
-                            name='username'
-                            id={`${fieldId}-username`}
-                            placeholder='Name'
-                            />
+                            <>
+                                <Field
+                                className={css.formElement}
+                                type='text'
+                                name='username'
+                                id={`${fieldId}-username`}
+                                placeholder='Name'
+                                />
+                                <ErrorMessage
+                                name='username'
+                                component='span'
+                                className={css.error}
+                                />
+                            </>
                             }
+
                             <Field
                             className={css.formElement}
                             type='email'
                             name='email'
                             id={`${fieldId}-email`}
                             placeholder='Email'
+                            />
+                            <ErrorMessage 
+                            name='email' 
+                            component='span'
+                            className={css.error}
                             />
 
                             <div className={css.passwordContainer}>
@@ -110,6 +160,12 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
                                     />}
                                 </button>
                             </div>
+                            <ErrorMessage 
+                            name='password' 
+                            component='span'
+                            className={css.error}
+                            />
+                            
                         </fieldset>
 
                         <button 
