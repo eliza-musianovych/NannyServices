@@ -4,7 +4,7 @@ import {
 } from "react";
 
 import type { Theme } from '../../types/themeTypes';
-import { ThemeContext } from "../../context/themeContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export default function ThemeProvider ({ children }: {children: React.ReactNode }) {
     const [theme, setTheme] = useState<Theme>(

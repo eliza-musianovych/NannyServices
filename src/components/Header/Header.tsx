@@ -6,7 +6,10 @@ import {
     NavLink,
     useLocation
 } from 'react-router-dom';
+import { FaUser } from "react-icons/fa6";
 import { useTheme } from '../../hooks/useTheme';
+import { useAuth } from '../../hooks/useAuth';
+import { logoutUser } from '../../services/authService';
 
 type HeaderProps = {
     onLoginClick: () => void;
@@ -15,14 +18,20 @@ type HeaderProps = {
 };
 
 export default function Header({ onLoginClick, onRegisterClick, isHome }: HeaderProps) {
+    const { user } = useAuth();
     const { cycleTheme } = useTheme();
     const location = useLocation();
 
     const routes = [
         {link: '/', text: 'Home'},
         {link: '/nannies', text: 'Nannies'},
-        {link: 'favorites', text: 'Favorites'},
+        {link: '/favorites', text: 'Favorites'},
     ];
+
+    const filteredRoutes = routes.filter(route => {
+        if (route.text === "Favorites" && !user) return false;
+        return true;
+    });
 
     const authbtn = [
         {onClick: onLoginClick, text: 'Log In'},
@@ -50,7 +59,7 @@ export default function Header({ onLoginClick, onRegisterClick, isHome }: Header
 
             <nav>
                 <ul className={css.navigation}>
-                    {routes.map(({ link, text }) => (
+                    {filteredRoutes.map(({ link, text }) => (
                         <li 
                         className={css.navigationItem}
                         key={link}
@@ -66,6 +75,7 @@ export default function Header({ onLoginClick, onRegisterClick, isHome }: Header
                 </ul>
             </nav>
 
+            {!user ? 
             <ul className={css.authBtnList}>
                 {authbtn.map(({ text, onClick }) => (
                     <button
@@ -77,7 +87,22 @@ export default function Header({ onLoginClick, onRegisterClick, isHome }: Header
                         {text}
                     </button>
                 ))}
-            </ul>
+            </ul> :
+            <div className={css.authList}>
+                <div className={css.user}>
+                    <div className={css.icon}>
+                        <FaUser className={css.userIcon} />
+                    </div>
+                    <p className={css.userName}>{user.displayName}</p>
+                </div>
+                <button 
+                className={css.logoutBtn}
+                onClick={logoutUser}
+                >
+                    Log out
+                </button>
+            </div>
+            }
         </header>
     );
 };
