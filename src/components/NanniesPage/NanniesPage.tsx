@@ -1,26 +1,41 @@
 import css from './NanniesPage.module.css';
 
-import { GoHeart } from "react-icons/go";
 import { getNannies } from '../../services/nanniesService';
 import { useQuery } from '@tanstack/react-query';
-import clsx from 'clsx';
+import { useEffect, useState } from 'react';
+import { type Nannie } from '../../types/nanniesType';
+import NannyCard from '../NannyCard/NannyCard';
 
 
 export default function NanniesPage() {
-    const { data: nannies } = useQuery({
+    const { data: allNannies, isLoading } = useQuery({
         queryKey: ['nannies'],
-        queryFn: getNannies
+        queryFn: getNannies,
+        staleTime: Infinity
     });
 
-    const getAge = (dobString: string) => {
-        const dob = new Date(dobString);
-        const today = new Date();
-        let age = today.getFullYear() - dob.getFullYear();
-        const monthDiff = today.getMonth() - dob.getMonth();
-        const dayDiff = today.getDate() - dob.getDate();
-        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) age--;
-        return age;
-    }
+    const [nannies, setNannies] = useState<Nannie[]>([]);
+    const [page, setPage] = useState(1);
+    const PageSize = 3;
+
+    useEffect(() => {
+        if (!allNannies) return;
+
+        const firstThree = allNannies.slice(0, PageSize);
+        setNannies(firstThree);
+    }, [allNannies]);
+
+    const handleLoadMore = () => {
+        if (!allNannies) return;
+
+        const nextPage = page + 1;
+        setNannies(allNannies.slice(0, nextPage * PageSize));
+        setPage(nextPage);
+    };
+
+    const canLoandMore = allNannies && nannies.length < allNannies.length;
+
+    if (isLoading) return <p>Loading...</p>;
 
     return(
         <section className={css.section}>
@@ -30,42 +45,18 @@ export default function NanniesPage() {
                 key={index}
                 className={css.nannyItem}
                 >
-                    <div className={css.avatar}>
-                        <img 
-                        src={nannie.avatar_url} 
-                        alt={nannie.name} 
-                        className={css.img}
-                        />
-                    </div>
-                    <div>
-                        <div className={css.mainDetails}>
-                            <div>
-                                <p className={css.nanny}>Nanny</p>
-                                <h2 className={css.nannyName}>{nannie.name}</h2>
-                            </div>
-                            <div className={css.detailsContainer}>
-                                <ul className={css.detailsList}>
-                                    <li className={css.listItem}>{nannie.location}</li>
-                                    <li className={css.listItem}>Rating: {nannie.rating}</li>
-                                    <li className={css.listItem}>Price / 1 hour: {nannie.price_per_hour}$</li>
-                                </ul>
-                                <GoHeart size={26}/>
-                            </div>
-                        </div>
-                        <ul className={css.nannyDetails}>
-                            <li className={css.detailItem}><span className={clsx(css.span, css.age)}>Age:</span> {getAge(nannie.birthday)}</li>
-                            <li className={css.detailItem}><span className={css.span}>Experience:</span> {nannie.experience}</li>
-                            <li className={css.detailItem}><span className={css.span}>Kids Age:</span> {nannie.kids_age}</li>
-                            <li className={css.detailItem}><span className={css.span}>Characters:</span> {nannie.characters.join(", ")}</li>
-                            <li className={css.detailItem}><span className={css.span}>Education:</span> {nannie.education}</li>
-                        </ul>
-                        <p className={css.about}>{nannie.about}</p>
-                        <button className={css.readMore}>Read more</button>
-                    </div>
+                    <NannyCard nannie={nannie}/>
                 </li>
             ))}
         </ul>
-        <button>Load more</button>
+        {canLoandMore &&
+        <button 
+        className={css.loadMoreBtn}
+        type='button'
+        onClick={handleLoadMore}
+        >
+            Load more
+        </button>}
         </section>
     )
 };

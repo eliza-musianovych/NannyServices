@@ -1,19 +1,23 @@
 import { useEffect } from 'react';
-import css from './AuthModal.module.css';
+import css from './Modal.module.css';
 
 import { createPortal } from 'react-dom';
 
 import { IoMdClose } from "react-icons/io";
 import RegisterForm from '../RegisterForm/RegisterForm';
 import LoginForm from '../LoginForm/LoginForm';
+import type { Nannie } from '../../types/nanniesType';
+import Appointment from '../Appointment/Appointment';
 
-type AuthModalProps = {
-    mode: 'login' | 'register';
+type ModalProps = {
+    mode: 'login' | 'register' | 'appointment';
     onClose: () => void;
+    nannie: Nannie
 };
 
-export default function AuthModal({ mode, onClose }: AuthModalProps) {
+export default function Modal({ mode, onClose, nannie }: ModalProps) {
     const isRegister = mode === 'register';
+    const isAppointment = mode === 'appointment';
 
     const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event.target === event.currentTarget) {
@@ -52,11 +56,9 @@ export default function AuthModal({ mode, onClose }: AuthModalProps) {
                 >
                     <IoMdClose size={32} color='var(--main-text-color)'/>
                 </button>
-                {
-                isRegister ? 
-                <RegisterForm onClose={onClose}/> :
-                <LoginForm onClose={onClose}/>
-                }
+                {isRegister && <RegisterForm onClose={onClose}/>}
+                {!isRegister && !isAppointment && <LoginForm onClose={onClose}/>}
+                {isAppointment && <Appointment nannie={nannie}/>}
             </div>
         </div>,
         document.body

@@ -8,7 +8,7 @@ import Home from './pages/Home';
 import Nannies from './pages/Nannies';
 import Favorites from './pages/Favorites';
 import { useState } from 'react';
-import AuthModal from './components/AuthModal/AuthModal';
+import AuthModal from './components/Modal/Modal';
 
 function App() {
   const location = useLocation();
@@ -19,6 +19,8 @@ function App() {
   const openLogin = () => setModalMode('login');
   const openRegister = () => setModalMode('register');
   const closeModal = () => setModalMode(null);
+
+  const [favorites, setFavourites] = useState([]);
 
   return (
     <div className={clsx(isHome && css.container)}>
@@ -32,7 +34,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/nannies' element={<Nannies />} />
-          <Route path='/favorites' element={<Favorites />}/>
+          <Route path='/favorites' element={<Favorites favorites={favorites}/>}/>
         </Routes>
       </main>
 

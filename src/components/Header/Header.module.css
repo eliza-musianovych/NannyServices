@@ -3,7 +3,7 @@
     background-color: var(--color-scheme);
     align-items: center;
     padding: 20px 128px;
-    justify-content: space-around;
+    width: 100%;
 }
 
 .homeHeader {
@@ -29,6 +29,8 @@
 .navigation {
     display: flex;
     gap: 40px;
+    justify-self: center;
+    margin-right: 217px;
 }
 
 .navigationItem {
