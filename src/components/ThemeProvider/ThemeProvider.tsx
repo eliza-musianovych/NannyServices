@@ -1,31 +1,31 @@
-import { 
-    useEffect, 
-    useState 
-} from "react";
+import { useState, useEffect } from "react";
+import type { ReactNode } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
+import type { Theme } from "../../types/themeTypes";
 
-import type { Theme } from '../../types/themeTypes';
-import { ThemeContext } from "../../context/ThemeContext.tsx";
+type ThemeProviderProps = {
+    children: ReactNode;
+};
 
-export default function ThemeProvider ({ children }: {children: React.ReactNode }) {
+export default function ThemeProvider({ children }: ThemeProviderProps) {
     const [theme, setTheme] = useState<Theme>(
-        () => (localStorage.getItem('theme') as Theme) || 'red'
+        () => (localStorage.getItem("theme") as Theme) || "red"
     );
 
     useEffect(() => {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
     }, [theme]);
 
     const cycleTheme = () => {
-        setTheme(prev => 
-            prev === 'red' ? 'blue' : prev === 'blue' ? 'green' : 'red'
+        setTheme(prev =>
+            prev === "red" ? "blue" : prev === "blue" ? "green" : "red"
         );
     };
 
     return (
-        <ThemeContext.Provider value={{ theme, cycleTheme }} >
+        <ThemeContext.Provider value={{ theme, cycleTheme }}>
             {children}
         </ThemeContext.Provider>
     );
-};
-
+}
