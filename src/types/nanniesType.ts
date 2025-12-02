@@ -18,3 +18,12 @@ export interface Nannie {
     "characters": string[],
     "rating": number,
 };
+
+export type FilterType = 
+| 'none'
+| 'a-z'
+| 'z-a'
+| 'greater-10'
+| 'less-10'
+| 'popular'
+| 'not-popular';

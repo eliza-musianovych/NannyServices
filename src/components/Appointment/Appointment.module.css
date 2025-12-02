@@ -31,3 +31,59 @@
     margin: 0;
     font-weight: 500;
 }
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.formElement {
+    border: 1px solid rgba(17, 16, 28, 0.1);
+    border-radius: 12px;
+    padding: 16px 18px;
+    overflow: auto;
+    scrollbar-width: none;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    color: var(--main-text-color);
+    background-color: transparent;
+}
+
+.formElement::placeholder {
+    color: var(--main-text-color);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+}
+
+.formElement:active,
+.formElement:focus,
+.formElement:hover {
+    outline: none;
+}
+
+.formElement::-webkit-scrollbar {
+    display: none;
+}
+
+.smallElement {
+    width: 50%;
+}
+
+.fieldContainer {
+    display: flex;
+    gap: 8px;
+}
+
+.comment {
+    resize: none;
+}
+
+.submitBtn {
+    margin-top: 40px;
+    color: var(--color-background-aditional);
+    padding-top: 16px;
+    padding-bottom: 16px;
+}

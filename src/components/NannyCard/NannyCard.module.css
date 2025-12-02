@@ -1,13 +1,25 @@
-
 .avatar {
     border: 2px solid var(--color-scheme-alt);
     border-radius: 30px;
     padding: 12px;
     height: fit-content;
+    position: relative;
 }
 
 .img {
     border-radius: 15px;
+}
+
+.online {
+    background-color: #38cd3e;
+    border-radius: 50%;
+    border: 2px solid #fbfbfb;;
+    position: absolute;
+    top: 9px;
+    right: 14px;
+    z-index: 9999;
+    width: 10px;
+    height: 10px;
 }
 
 .mainDetails {

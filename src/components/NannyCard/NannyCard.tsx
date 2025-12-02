@@ -13,17 +13,18 @@ import { FaStar } from "react-icons/fa6";
 import Modal from "../Modal/Modal";
 
 type NannyCardProps = {
-    nannie: Nannie
+    nannie: Nannie;
+    isFavorite: boolean;
+    addFavorite: () => void;
+    removeFavorite: () => void;
 };
 
-export default function NannyCard ({ nannie }: NannyCardProps) {
+export default function NannyCard ({ nannie, isFavorite, addFavorite, removeFavorite }: NannyCardProps) {
         const [readMore, setReadMore] = useState(false);
     
         const handleReadMore = () => {
             setReadMore(true);
         };
-    
-        const [isFavourite, setIsFavourite] = useState(false);
 
         const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -57,6 +58,7 @@ export default function NannyCard ({ nannie }: NannyCardProps) {
                         alt={nannie.name} 
                         className={css.img}
                         />
+                        <div className={css.online}></div>
                     </div>
                     <div>
                         <div className={css.mainDetails}>
@@ -85,9 +87,16 @@ export default function NannyCard ({ nannie }: NannyCardProps) {
                                         <span className={css.price}>{ nannie.price_per_hour}$</span>
                                     </li>
                                 </ul>
-                                {!isFavourite ? 
-                                <GoHeart size={26}/> :
-                                <GoHeartFill size={26}/>}
+                                {!isFavorite ? 
+                                <GoHeart 
+                                size={26} 
+                                onClick={addFavorite}
+                                /> :
+                                <GoHeartFill 
+                                size={26} 
+                                onClick={removeFavorite}
+                                fill="#f03f3b"
+                                />}
                             </div>
                         </div>
                         <ul className={css.nannyDetails}>

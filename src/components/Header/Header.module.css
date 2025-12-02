@@ -1,9 +1,10 @@
 .header {
-    display: flex;
+    display: grid;
     background-color: var(--color-scheme);
     align-items: center;
     padding: 20px 128px;
     width: 100%;
+    grid-template-columns: 1fr auto 1fr;
 }
 
 .homeHeader {
@@ -15,11 +16,11 @@
 }
 
 .logo {
+    justify-self: start;
     font-size: 24px;
     line-height: 117%;
     letter-spacing: -0.02em;
     color: var(--color-background-aditional);
-    margin-right: 305px;
 }
 
 .homeLogo {
@@ -30,7 +31,23 @@
     display: flex;
     gap: 40px;
     justify-self: center;
-    margin-right: 217px;
+}
+
+.navigationItem a {
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.navigationItem a.active::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-background-aditional);
+    border-radius: 50%;
 }
 
 .navigationItem {
@@ -44,6 +61,7 @@
     margin-left: 92px;
     display: flex;
     gap: 8px;
+    justify-self: end;
 }
 
 .authBtnItem {
@@ -61,6 +79,7 @@
 .authList {
     display: flex;
     gap: 24px;
+    justify-self: end;
 }
 
 .user {

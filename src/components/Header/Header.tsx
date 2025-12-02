@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { 
     Link, 
     NavLink,
-    useLocation
+    useLocation,
+    useNavigate
 } from 'react-router-dom';
 import { FaUser } from "react-icons/fa6";
 import { useTheme } from '../../hooks/useTheme';
@@ -21,6 +22,7 @@ export default function Header({ onLoginClick, onRegisterClick, isHome }: Header
     const { user } = useAuth();
     const { cycleTheme } = useTheme();
     const location = useLocation();
+    const navigate = useNavigate();
 
     const routes = [
         {link: '/', text: 'Home'},
@@ -47,6 +49,15 @@ export default function Header({ onLoginClick, onRegisterClick, isHome }: Header
         }
     };
 
+    const handleLogout = () => {
+        logoutUser();
+        
+        if (location.pathname === '/favorites') {
+            navigate('/');
+            return;
+        }
+    }
+
     return(
         <header className={clsx(css.header, isHome && css.homeHeader)}>
             <Link 
@@ -67,6 +78,8 @@ export default function Header({ onLoginClick, onRegisterClick, isHome }: Header
                             <NavLink
                             to={link}
                             end={link === '/'}
+                            className={({ isActive }) => 
+                                isActive && link !== '/' ? css.active : ''}
                             >
                                 {text}
                             </NavLink>
@@ -97,7 +110,7 @@ export default function Header({ onLoginClick, onRegisterClick, isHome }: Header
                 </div>
                 <button 
                 className={css.logoutBtn}
-                onClick={logoutUser}
+                onClick={handleLogout}
                 >
                     Log out
                 </button>

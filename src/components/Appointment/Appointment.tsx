@@ -30,7 +30,7 @@ export default function Appointment ({ nannie }: AppointmentProps) {
         address: '',
         phoneNumber: '',
         childsAge: '',
-        meetingTime: '',
+        meetingTime: '00:00',
         email: '',
         parentName: '',
         comment: '',
@@ -82,7 +82,7 @@ export default function Appointment ({ nannie }: AppointmentProps) {
 
                     <div className={css.fieldContainer}>
                         <Field
-                            className={css.formElement}
+                            className={clsx(css.formElement, css.smallElement)}
                             type='text'
                             name='childsAge'
                             id={`${fieldId}-childsAge`}
@@ -90,7 +90,7 @@ export default function Appointment ({ nannie }: AppointmentProps) {
                         />
 
                         <Field
-                            className={css.formElement}
+                            className={clsx(css.formElement, css.smallElement)}
                             type='time'
                             name='meetingTime'
                             id={`${fieldId}-meetingTime`}
@@ -114,8 +114,9 @@ export default function Appointment ({ nannie }: AppointmentProps) {
                     />
 
                     <Field
-                        className={css.formElement}
-                        type='text'
+                        className={clsx(css.formElement, css.comment)}
+                        as="textarea"
+                        rows={3}
                         name='comment'
                         id={`${fieldId}-comment`}
                         placeholder='Comment'
