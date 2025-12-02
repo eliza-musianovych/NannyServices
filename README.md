@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# Nanny Booking App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, user-friendly web application for finding and booking reliable nannies. This app helps parents quickly browse, select, and save their favorite nannies in just a few clicks.
 
-Currently, two official plugins are available:
+## 🌟 Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Home Page** – Welcome users with an overview and easy navigation to other sections.  
+- **Nannies Page** – Browse detailed profiles of available nannies with relevant information.  
+- **Favorites Page** – Save preferred nannies for quick access. Accessible **only to registered users**.  
 
-## React Compiler
+## 💻 Tech Stack
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- **Frontend:** React  
+- **Backend:** Firebase (Authentication, Firestore, Hosting)  
+- **Authentication & User Management:** Firebase Auth  
+- **Data Storage:** Firestore  
 
-## Expanding the ESLint configuration
+## 🎨 Design
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The app’s design is based on a clean and intuitive Figma prototype:  
+[View Figma Design](https://www.figma.com/file/u36ajEOsnwio2GDGiabVPD/Nanny-Sevices?type=design&node-id=0-1&mode=design&t=CZpMnnOCRwAYc81O-0)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. **Clone the repository**  
+   ```bash
+   git clone https://github.com/yourusername/nanny-booking-app.git
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+2. **Go to the project directory**  
+   ```bash
+   cd nanny-booking-app
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+3. **Install dependencies**  
+   ```bash
+   npm install
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+4. **Start the development server**  
+   ```bash
+   npm start
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Open http://localhost:3000 to view the app in your browser.
+
+🛠 Usage
+Explore the Home page to navigate the app.
+
+Visit the Nannies page to browse and search for available nannies.
+
+Log in or register to access the Favorites page and save preferred nannies.
