@@ -20,7 +20,7 @@ type AppointmentFormValues = {
 };
 
 type AppointmentProps = {
-    nannie: Nannie;
+    nannie?: Nannie;
 };
 
 export default function Appointment ({ nannie }: AppointmentProps) {
@@ -48,12 +48,12 @@ export default function Appointment ({ nannie }: AppointmentProps) {
                 className={css.img}
                 width={44}
                 height={44}
-                src={nannie.avatar_url} 
-                alt={nannie.name}
+                src={nannie?.avatar_url} 
+                alt={nannie?.name}
                 />
                 <div className={css.nameContainer}>
                     <p className={css.yourNanny}>Your nanny</p>
-                    <h3 className={css.name}>{nannie.name}</h3>
+                    <h3 className={css.name}>{nannie?.name}</h3>
                 </div>
             </div>
 

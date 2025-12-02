@@ -12,7 +12,7 @@ import Appointment from '../Appointment/Appointment';
 type ModalProps = {
     mode: 'login' | 'register' | 'appointment';
     onClose: () => void;
-    nannie: Nannie
+    nannie?: Nannie;
 };
 
 export default function Modal({ mode, onClose, nannie }: ModalProps) {
