@@ -7,6 +7,10 @@ import type { Nannie } from '../types/nanniesType';
 
 export const getNannies = async (): Promise<Nannie[]> => {
     const snapshot = await get(ref(db, "/"));
-    return snapshot.val();
+    const data = snapshot.val();
+    
+    return Object.values(data)
+        .filter((item) => typeof item === "object" && item !== null)
+        .map((item) => item as Nannie); 
 };
 
