@@ -2,11 +2,15 @@ import {
     useState,
     useEffect
  } from "react";
+import toast from "react-hot-toast";
 import {type Nannie } from "../types/nanniesType";
+import { useAuth } from "./useAuth";
 
 const FavoritesKey = 'favoriteNannies';
 
 export const useFavorites = () => {
+    const { user } = useAuth();
+
     const [favorites, setFavorites] = useState<Nannie[]>(() => {
         if (typeof window === "undefined") return [];
         const stored = localStorage.getItem(FavoritesKey);
@@ -18,6 +22,11 @@ export const useFavorites = () => {
     }, [favorites]);
 
     const addFavorite = (nannie: Nannie) => {
+       if (!user) {
+            toast.error('Please log in to proceed.')
+            return;
+        }
+
         setFavorites(prev => {
             if(prev.find(n => n.name === nannie.name)) return prev;
             return [...prev, nannie];

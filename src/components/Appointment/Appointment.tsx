@@ -8,6 +8,7 @@ import {
 } from 'formik';
 import type { Nannie } from '../../types/nanniesType';
 import clsx from 'clsx';
+import toast from 'react-hot-toast';
 
 type AppointmentFormValues = {
     address: string;
@@ -21,9 +22,10 @@ type AppointmentFormValues = {
 
 type AppointmentProps = {
     nannie?: Nannie;
+    onClose: () => void;
 };
 
-export default function Appointment ({ nannie }: AppointmentProps) {
+export default function Appointment ({ nannie, onClose }: AppointmentProps) {
     const fieldId = useId();
 
     const initialAppointment: AppointmentFormValues = {
@@ -36,7 +38,10 @@ export default function Appointment ({ nannie }: AppointmentProps) {
         comment: '',
     };
 
-    const handleSubmit = () => {};
+    const handleSubmit = () => {
+        toast.success('Appointment successful');
+        onClose();
+    };
 
     return (
         <>

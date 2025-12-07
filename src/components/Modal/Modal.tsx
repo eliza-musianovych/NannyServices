@@ -58,7 +58,7 @@ export default function Modal({ mode, onClose, nannie }: ModalProps) {
                 </button>
                 {isRegister && <RegisterForm onClose={onClose}/>}
                 {!isRegister && !isAppointment && <LoginForm onClose={onClose}/>}
-                {isAppointment && <Appointment nannie={nannie}/>}
+                {isAppointment && <Appointment nannie={nannie} onClose={onClose}/>}
             </div>
         </div>,
         document.body

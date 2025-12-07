@@ -2,6 +2,7 @@ import css from './App.module.css';
 
 import clsx from 'clsx';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 import Header from './components/Header/Header';
 import Home from './pages/Home';
@@ -22,6 +23,11 @@ function App() {
 
   return (
     <div className={clsx(isHome && css.container)}>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
+
       <Header 
       onLoginClick={openLogin} 
       onRegisterClick={openRegister} 

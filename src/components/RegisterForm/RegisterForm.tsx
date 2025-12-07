@@ -45,8 +45,7 @@ export default function RegisterForm ({ onClose }: RegisterFormProps) {
             values: RegisterFormValues,
             actions: FormikHelpers<RegisterFormValues>
         ) => {
-            const user = await registerUser(values.username, values.email, values.password);
-            console.log(user);
+            await registerUser(values.username, values.email, values.password);
             actions.resetForm();
             onClose();
         };
