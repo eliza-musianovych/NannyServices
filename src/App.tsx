@@ -1,7 +1,7 @@
 import css from './App.module.css';
 
 import clsx from 'clsx';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
 import Header from './components/Header/Header';
@@ -35,13 +35,11 @@ function App() {
       />
 
       <main>
-        <BrowserRouter>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/nannies' element={<Nannies />} />
             <Route path='/favorites' element={<Favorites />}/>
           </Routes>
-        </BrowserRouter>
       </main>
 
       {modalMode && 
