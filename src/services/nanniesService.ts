@@ -9,8 +9,10 @@ export const getNannies = async (): Promise<Nannie[]> => {
     const snapshot = await get(ref(db, "/"));
     const data = snapshot.val();
     
-    return Object.values(data)
-        .filter((item) => typeof item === "object" && item !== null)
-        .map((item) => item as Nannie); 
+    return Object.entries(data)
+        .filter(([key, value]) => 
+            !isNaN(Number(key)) && typeof value === "object"
+        )
+        .map(([, value]) => value as Nannie);
 };
 

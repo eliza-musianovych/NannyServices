@@ -10,9 +10,7 @@ export default function NanniesPage() {
         staleTime: Infinity
     });
 
-    console.log("🔥 allNannies from Firebase:", allNannies);
-
-        const { removeFavorite, isFavorite, addFavorite } = useFavorites();
+    const { removeFavorite, isFavorite, addFavorite } = useFavorites();
 
     if (isLoading) return <p>Loading...</p>;
 
